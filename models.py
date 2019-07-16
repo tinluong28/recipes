@@ -13,11 +13,11 @@ class User(db.Model):
     email = db.Column(db.String(45), nullable=False)
     location = db.Column(db.String(45), nullable=False)
     hashed_pw = db.Column(db.String(60), nullable=False)
-    birthdate = db.Column(db.DateTime, nullable=False)
+    birthdate = db.Column(db.String(15), nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(
         db.DateTime, server_default=func.now(), onupdate=func.now())
-    recipes_this_user_likes = db.relationship('Recipes', secondary=likes_table)
+    recipes_this_user_likes = db.relationship('Recipe', secondary=likes_table)
 
 
 class Recipe(db.Model):
