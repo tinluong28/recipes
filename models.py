@@ -8,7 +8,7 @@ likes_table = db.Table('likes',
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(45), nullable=False)
     email = db.Column(db.String(45), nullable=False)
     location = db.Column(db.String(45), nullable=False)
@@ -21,11 +21,12 @@ class User(db.Model):
 
 
 class Recipe(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     instructions = db.Column(db.Text, nullable=False)
+    under30 = db.Column(db.String(3), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     author = db.relationship('User', foreign_keys=[
-                             author_id], backref='recipes', cascade='all', lazy=True)
+                             author_id], backref='recipes', lazy=True)
     users_who_like_this_recipe = db.relationship('User', secondary=likes_table)

@@ -44,3 +44,20 @@ def validate_signup(form):
         return False
     if is_valid:
         return True
+
+
+def validate_recipe(form):
+    is_valid = True
+    if len(form['name']) < 3:
+        is_valid = False
+        flash('Recipe name is required and must be at least 3 characters')
+    if len(form['description']) < 3:
+        is_valid = False
+        flash('Recipe description is required and must be at least 3 characters')
+    if len(form['instructions']) < 3:
+        is_valid = False
+        flash('Recipe instructions is required and must be at least 3 characters')
+    if is_valid:
+        return True
+    else:
+        return False

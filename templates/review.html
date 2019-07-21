@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Recipes</title>
+    <title>Review</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -28,21 +28,35 @@
     <div class="container mt-3">
       <nav class="navbar row">
         <h1>Welcome {{ user.user_name }}</h1>
-        <a href="/logout" class="nav-link text-right">Logout</a>
+        <div class="text-right row">
+          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/create" class="nav-link">Create</a>
+          <a href="/logout" class="nav-link">Logout</a>
+        </div>
       </nav>
-      <div class="container row">
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-info text-white text-center">Create</h3>
-            <a href="/create">Click here to create new recipes</a>
-          </div>
-        </div>
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-primary text-white text-center">Review</h3>
-            <a href="/review">Click here to review your existing recipes</a>
-          </div>
-        </div>
+      <div class="container">
+        <h4>These are your recipes</h4>
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Under 30 minutes?</th>
+            <th>Actions</th>
+          </thead>
+          {% for recipe in recipes %}
+          <tr>
+            <td>{{ recipe.name }}</td>
+            <td>{{ recipe.description }}</td>
+            <td>{{ recipe.under30 }}</td>
+            <td>
+              <a href="/instruction/{{ recipe.id }}" class="text-primary"
+                >View Instruction</a
+              >
+              <a href="{{ recipe.id }}/delete" class="text-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
       </div>
     </div>
     <script src="" async defer></script>
