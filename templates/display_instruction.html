@@ -28,36 +28,43 @@
     <div class="container mt-3">
       <nav class="navbar row">
         <h1>Welcome {{ user.user_name }}</h1>
-        <a href="/logout" class="nav-link text-right">Logout</a>
+        <div class="text-right row">
+          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/create" class="nav-link">Create</a>
+          <a href="/logout" class="nav-link">Logout</a>
+        </div>
       </nav>
-      <div class="jumbotron">
-        <h5>
-          This is a social network where users can share their favorite recipes.
-        </h5>
-        <h6>There are currently {{ all_recipes }} recipe(s)</h6>
-        <h6>You have contributed {{ user_recipes }} recipe(s)</h6>
-      </div>
-      <div class="container row">
-        <div class="card col-md-3 m-2">
+      <div class="container">
+        <div class="card card col-md-10 m-2">
           <div class="card-body">
-            <h3 class="card-title bg-info text-white text-center">Create</h3>
-            <a href="/create">Click here to create a new recipe</a>
-          </div>
-        </div>
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-warning text-white text-center">
-              Your recipes
-            </h3>
-            <a href="/review">Click here to review your recipes</a>
-          </div>
-        </div>
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-primary text-white text-center">
-              All recipes
-            </h3>
-            <a href="/all_recipes">Click here to review all users' recipes</a>
+            <h3 class="card-title">View recipe</h3>
+            <div>
+              <p><strong>Recipe Name:</strong> {{ recipe.name }}</p>
+            </div>
+            <div>
+              <p><strong>Description:</strong> {{ recipe.description }}</p>
+            </div>
+            <div>
+              <p><strong>Instructions:</strong></p>
+              <ul>
+                {% for step in recipe.instructions.split(".") %}
+                <li>{{ step }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div>
+              <p>
+                <strong>Under 30 minutes to prepare?</strong>
+                {{ recipe.under30 }}
+              </p>
+            </div>
+            <a
+              href="/all_recipes"
+              class="btn btn-md btn-secondary"
+              type="submit"
+            >
+              Back
+            </a>
           </div>
         </div>
       </div>

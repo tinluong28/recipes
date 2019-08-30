@@ -35,33 +35,34 @@
         </div>
       </nav>
       <div class="container">
-        <h4>These are your own recipes</h4>
+        <h4>These are recipes shared by users all over the world</h4>
         <table class="table">
           <thead>
             <th>Name</th>
             <th>Description</th>
             <th>Under 30 minutes?</th>
+            <th>Shared By</th>
             <th>Actions</th>
           </thead>
-          {% for recipe in recipes %} {% if recipe.author_id == user.id %}
+          {% for recipe in recipes %}
           <tr>
             <td>{{ recipe.name }}</td>
             <td>{{ recipe.description }}</td>
             <td>{{ recipe.under30 }}</td>
+            <td>{{ recipe.author.user_name }}</td>
             <td>
               <a href="/instruction/{{ recipe.id }}" class="text-primary"
                 >View Instruction</a
               >
-              <a href="{{ recipe.id }}/delete" class="text-danger">Delete</a>
             </td>
           </tr>
-          {% endif %} {% endfor %}
+          {% endfor %}
         </table>
 
-        {% if not user.recipes %}
+        {% if not recipes %}
         <p>
-          You currently do not have any recipes. Click
-          <a href="/create">here</a> to create one.
+          No recipes have been added. Click<a href="/create">here</a> to create
+          one.
         </p>
         {% endif %}
       </div>

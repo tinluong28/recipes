@@ -39,7 +39,7 @@ def dashboard():
         recipes = Recipe.query.filter_by().count()
         user_recipes = Recipe.query.filter_by(
             author_id=session['userID']).count()
-        return render_template('dashboard.html', user=user, all_recipes=recipes, user_recipes=user_recipes)
+        return render_template('dashboard.html', user=user, all_recipes=recipes, user_recipes = user_recipes)
     else:
         return redirect('/')
 
