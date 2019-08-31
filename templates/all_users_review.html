@@ -17,6 +17,11 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -25,46 +30,59 @@
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-    <div class="container mt-3">
-      <nav class="navbar row">
-        <h1>Welcome {{ user.user_name }}</h1>
-        <div class="text-right row">
-          <a href="/dashboard" class="nav-link">Dashboard</a>
-          <a href="/create" class="nav-link">Create</a>
-          <a href="/logout" class="nav-link">Logout</a>
-        </div>
-      </nav>
-      <div class="container">
-        <h4>These are recipes shared by users all over the world</h4>
-        <table class="table">
-          <thead>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Under 30 minutes?</th>
-            <th>Shared By</th>
-            <th>Actions</th>
-          </thead>
-          {% for recipe in recipes %}
-          <tr>
-            <td>{{ recipe.name }}</td>
-            <td>{{ recipe.description }}</td>
-            <td>{{ recipe.under30 }}</td>
-            <td>{{ recipe.author.user_name }}</td>
-            <td>
-              <a href="/instruction/{{ recipe.id }}" class="text-primary"
-                >View Instruction</a
-              >
-            </td>
-          </tr>
-          {% endfor %}
-        </table>
+    <div class="all-users pb-5">
+      <div class="container pt-3">
+        <nav class="navbar row transparent">
+          <h1>Welcome {{ user.user_name }}</h1>
+          <div class="text-right row">
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <a href="/create" class="nav-link">Create</a>
+            <a href="/logout" class="nav-link">Logout</a>
+          </div>
+        </nav>
+        <div class="container mt-5 bg-white pb-5">
+          <h2 class="mt-2 mb-3">
+            These are recipes shared by users from all over the world
+          </h2>
+          <table class="table">
+            <thead>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Under 30 minutes?</th>
+              <th>Shared By</th>
+              <th>Actions</th>
+            </thead>
+            {% for recipe in recipes %}
+            <tr>
+              <td>{{ recipe.name }}</td>
+              <td>{{ recipe.description }}</td>
+              <td>{{ recipe.under30 }}</td>
+              <td>{{ recipe.author.user_name }}</td>
+              <td>
+                <a
+                  href="/instruction/{{ recipe.id }}"
+                  class="btn btn-sm btn-primary"
+                  >View Instruction</a
+                >
+                {% if recipe.author.id == user.id %}
+                <a href="{{ recipe.id }}/delete" class="btn btn-sm btn-danger"
+                  >Delete</a
+                >
+                {% else %}
+                <a href="#" class="btn btn-sm btn-info">Like</a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
 
-        {% if not recipes %}
-        <p>
-          No recipes have been added. Click<a href="/create">here</a> to create
-          one.
-        </p>
-        {% endif %}
+          {% if not recipes %}
+          <p>
+            No recipes have been added. Click<a href="/create">here</a> to
+            create one.
+          </p>
+          {% endif %}
+        </div>
       </div>
     </div>
     <script src="" async defer></script>

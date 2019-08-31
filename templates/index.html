@@ -21,6 +21,11 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
     <script type="text/javascript" src="/static/index.js"></script>
   </head>
   <body>
@@ -30,119 +35,131 @@
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-    <div class="container mt-3">
-      <div class="row">
-        <div class="card col-md-6 mr-5 bg-secondary text-white">
-          <h2 class="card-title pt-2">Registration</h2>
-          <hr />
-          {% with success = get_flashed_messages(category_filter=['success']) %}
-          {% if success %}
-          <p class="badge badge-success">{{ success[0] }}</p>
-          {% endif %} {% endwith %} {% with errors =
-          get_flashed_messages(category_filter=["errors"]) %} {% if errors %}
-          <div>
-            {%- for msg in errors %}
-            <div>
-              <p class="badge badge-danger">{{ msg }}</p>
+    <div class="landingpage">
+      <div class="nav pt-2 transparent">
+        <h2 class="col-md-5">Welcome</h2>
+        <div class="col-md-7">
+          <form action="/login" method="POST" class="row">
+            <div class="col-md-5 d-inline">
+              <div class="row">
+                <label class="col-md-5" for="login_username">User Name: </label>
+                <input
+                  type="text"
+                  name="user_name"
+                  class="form-control col-md-7"
+                  id="login_username"
+                />
+              </div>
             </div>
-
-            {% endfor -%}
-          </div>
-          {% endif %} {% endwith %}
-          <form
-            action="/register"
-            method="POST"
-            id="signupForm"
-            class="card-body"
-          >
-            <div id="usernameMsg"></div>
-            <div class="form-group">
-              <label for="username">User Name:</label>
-              <input
-                type="text"
-                name="user_name"
-                class="form-control"
-                id="username"
-              />
+            <div class="col-md-5 d-inline">
+              <div class="row">
+                <label class="col-md-4" for="login_pw">Password: </label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control col-md-7"
+                  id="login_pw"
+                />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                name="email"
-                class="form-control"
-                id="email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="location">Dojo Location:</label>
-              <select name="location" id="location" class="custom-select">
-                <option value="chicago">Chicago</option>
-                <option value="los angeles">Los Angeles</option>
-                <option value="new york">New York</option>
-                <option value="san francisco">San Francisco</option>
-                <option value="seattle">Seattle</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="password">Password:</label>
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                id="password"
-              />
-            </div>
-            <div class="form-group">
-              <label for="confirm_pw">Confirm Password:</label>
-              <input
-                type="password"
-                name="confirm_password"
-                class="form-control"
-                id="confirm_pw"
-              />
-            </div>
-            <div class="form-group">
-              <label for="birthdate">Birthdate:</label>
-              <input
-                type="date"
-                name="birthdate"
-                min="1939-12-31"
-                class="form-control"
-                id="birthdate"
-              />
-            </div>
-            <button class="btn btn-md btn-primary">REGISTER</button>
+            <button class="btn btn-md btn-primary">SIGN IN</button>
           </form>
-        </div>
-        <div class="card col-md-4">
-          <h2 class="card-title pt-2">Sign In</h2>
-          <hr />
           {% with error = get_flashed_messages(category_filter=['login error'])
           %} {% if error %}
           <p class="badge badge-danger">{{ error[0] }}</p>
           {% endif %} {% endwith %}
-          <form action="/login" method="POST" class="card-body">
-            <div class="form-group">
-              <label for="login_username">User Name:</label>
-              <input
-                type="text"
-                name="user_name"
-                class="form-control"
-                id="login_username"
-              />
+        </div>
+      </div>
+      <div class="container mt-3">
+        <div class="row">
+          <div class="col-md-4 m-5 transparent">
+            <h2 class="card-title pt-2">Register</h2>
+
+            <hr />
+            {% with success = get_flashed_messages(category_filter=['success'])
+            %} {% if success %}
+            <p class="badge badge-success">{{ success[0] }}</p>
+            {% endif %} {% endwith %} {% with errors =
+            get_flashed_messages(category_filter=["errors"]) %} {% if errors %}
+            <div>
+              {%- for msg in errors %}
+              <div>
+                <p class="badge badge-danger">{{ msg }}</p>
+              </div>
+
+              {% endfor -%}
             </div>
-            <div class="form-group">
-              <label for="login_pw">Password:</label>
-              <input
-                type="password"
-                name="password"
-                class="form-control"
-                id="login_pw"
-              />
-            </div>
-            <button class="btn btn-md btn-primary">SIGN IN</button>
-          </form>
+            {% endif %} {% endwith %}
+            <form
+              action="/register"
+              method="POST"
+              id="signupForm"
+              class="card-body"
+            >
+              <div id="usernameMsg"></div>
+              <div class="form-group">
+                <label for="username">User Name:</label>
+                <input
+                  type="text"
+                  name="user_name"
+                  class="form-control"
+                  id="username"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  id="email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="location">Dojo Location:</label>
+                <select name="location" id="location" class="custom-select">
+                  <option value="chicago">Chicago</option>
+                  <option value="los angeles">Los Angeles</option>
+                  <option value="new york">New York</option>
+                  <option value="san francisco">San Francisco</option>
+                  <option value="seattle">Seattle</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  id="password"
+                />
+                <small
+                  >*Must be at least 5 characters and contain at least a number
+                  and special character, upper and lowercase</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="confirm_pw">Confirm Password:</label>
+                <input
+                  type="password"
+                  name="confirm_password"
+                  class="form-control"
+                  id="confirm_pw"
+                />
+              </div>
+              <div class="form-group">
+                <label for="birthdate">Birthdate:</label>
+                <input
+                  type="date"
+                  name="birthdate"
+                  min="1939-12-31"
+                  class="form-control"
+                  id="birthdate"
+                />
+              </div>
+              <button class="btn btn-md btn-primary">REGISTER</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

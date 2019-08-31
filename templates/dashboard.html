@@ -17,6 +17,11 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -25,39 +30,44 @@
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-    <div class="container mt-3">
-      <nav class="navbar row">
-        <h1>Welcome {{ user.user_name }}</h1>
-        <a href="/logout" class="nav-link text-right">Logout</a>
-      </nav>
-      <div class="jumbotron">
-        <h5>
-          This is a social network where users can share their favorite recipes.
-        </h5>
-        <h6>There are currently {{ all_recipes }} recipe(s)</h6>
-        <h6>You have contributed {{ user_recipes }} recipe(s)</h6>
-      </div>
-      <div class="container row">
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-info text-white text-center">Create</h3>
-            <a href="/create">Click here to create a new recipe</a>
-          </div>
+    <div class="dashboard">
+      <div class="container pt-3">
+        <nav class="navbar row transparent">
+          <h1>Welcome {{ user.user_name }}</h1>
+          <a href="/logout" class="btn btn-md btn-secondary text-right"
+            >Logout</a
+          >
+        </nav>
+        <div class="jumbotron mt-3 transparent">
+          <h5>
+            This is a social network where users can share their favorite
+            recipes.
+          </h5>
+          <h6>There are currently {{ all_recipes }} recipe(s).</h6>
+          <h6>You have contributed {{ user_recipes }} recipe(s).</h6>
         </div>
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-warning text-white text-center">
-              Your recipes
-            </h3>
-            <a href="/review">Click here to review your recipes</a>
+        <div class="container row">
+          <div class="card col-md-3 m-2">
+            <div class="card-body">
+              <h3 class="card-title bg-info text-white text-center">Create</h3>
+              <a href="/create">Click here to create a new recipe</a>
+            </div>
           </div>
-        </div>
-        <div class="card col-md-3 m-2">
-          <div class="card-body">
-            <h3 class="card-title bg-primary text-white text-center">
-              All recipes
-            </h3>
-            <a href="/all_recipes">Click here to review all users' recipes</a>
+          <div class="card col-md-3 m-2">
+            <div class="card-body">
+              <h3 class="card-title bg-warning text-white text-center">
+                Your recipes
+              </h3>
+              <a href="/review">Click here to view your recipes</a>
+            </div>
+          </div>
+          <div class="card col-md-3 m-2">
+            <div class="card-body">
+              <h3 class="card-title bg-primary text-white text-center">
+                All recipes
+              </h3>
+              <a href="/all_recipes">Click here to view all users' recipes</a>
+            </div>
           </div>
         </div>
       </div>

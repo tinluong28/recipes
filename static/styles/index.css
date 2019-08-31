@@ -1,0 +1,33 @@
+.landingpage {
+  background-image: url("../img/chips-salsa.jpg");
+  background-color: transparent;
+  color: black;
+}
+.transparent {
+  background: rgba(201, 199, 199, 0.6);
+}
+
+.dashboard {
+  height: 1500px;
+  background-image: url("../img/greens.jpg");
+  background-color: transparent;
+}
+
+.review {
+  height: 1500px;
+  background-image: url("../img/french-toast.jpg");
+}
+
+.all-users {
+  height: 1500px;
+  background-image: url("../img/tomato-soup.jpg");
+}
+
+.create {
+  height: 1300px;
+  background-image: url("../img/citrus.jpg");
+}
+
+.instructions {
+  background-image: url("../img/muffin-egg-breakfast.jpg");
+}
