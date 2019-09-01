@@ -22,6 +22,12 @@
       type="text/css"
       href="{{ url_for('static', filename='styles/index.css') }}"
     />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+
+    <script type="text/javascript" src="/static/index.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -40,41 +46,92 @@
             <a href="/logout" class="nav-link">Logout</a>
           </div>
         </nav>
-        <div class="container transparent text-white mt-5">
-          <h4>These are your own recipes</h4>
-          <a href="/create" class="btn btn-md btn-info m-3">Create New</a>
-          <table class="table">
-            <thead>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Under 30 minutes?</th>
-              <th>Actions</th>
-            </thead>
-            {% for recipe in recipes %} {% if recipe.author_id == user.id %}
-            <tr>
-              <td>{{ recipe.name }}</td>
-              <td>{{ recipe.description }}</td>
-              <td>{{ recipe.under30 }}</td>
-              <td>
-                <a
-                  href="/instruction/{{ recipe.id }}"
-                  class="btn btn-sm btn-primary"
-                  >View Instruction</a
-                >
-                <a href="{{ recipe.id }}/delete" class="btn btn-sm btn-danger"
-                  >Delete</a
-                >
-              </td>
-            </tr>
-            {% endif %} {% endfor %}
-          </table>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 mt-5 recipe-tab">
+              <h6 class="pill-select active" id="created-tab">
+                Created by You
+              </h6>
+              <h6 class="pill-select" id="liked-tab">Liked by You</h6>
+            </div>
+            <div class="col-md-10">
+              <div
+                class="container bg-white text-black mt-5 p-3 appear"
+                id="created_recipe"
+              >
+                <h4>These are recipes created by you.</h4>
+                <a href="/create" class="btn btn-md btn-info m-3">Create New</a>
+                <table class="table">
+                  <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Under 30 minutes?</th>
+                    <th>Actions</th>
+                  </thead>
+                  {% for recipe in recipes %} {% if recipe.author_id == user.id
+                  %}
+                  <tr>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.description }}</td>
+                    <td>{{ recipe.under30 }}</td>
+                    <td>
+                      <a
+                        href="/instruction/{{ recipe.id }}"
+                        class="btn btn-sm btn-primary"
+                        >View Instruction</a
+                      >
+                    </td>
+                  </tr>
+                  {% endif %} {% endfor %}
+                </table>
 
-          {% if not user.recipes %}
-          <p>
-            You currently do not have any recipes. Click
-            <a href="/create">here</a> to create one.
-          </p>
-          {% endif %}
+                {% if not user.recipes %}
+                <p>
+                  You currently do not have any recipes. Click
+                  <a href="/create">here</a> to create one.
+                </p>
+                {% endif %}
+              </div>
+              <div
+                class="container bg-white text-black mt-5 p-3 appear"
+                id="liked_recipe"
+              >
+                <h4>These are recipes liked by you.</h4>
+                <a href="/create" class="btn btn-md btn-info m-3">Create New</a>
+                <table class="table">
+                  <thead>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Under 30 minutes?</th>
+                    <th>Shared by</th>
+                    <th>Actions</th>
+                  </thead>
+                  {% for recipe in user.recipes_this_user_likes %}
+                  <tr>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.description }}</td>
+                    <td>{{ recipe.under30 }}</td>
+                    <td>{{ recipe.author.user_name }}</td>
+                    <td>
+                      <a
+                        href="/instruction/{{ recipe.id }}"
+                        class="btn btn-sm btn-primary"
+                        >View Instruction</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+
+                {% if not user.recipes_this_user_likes %}
+                <p>
+                  You have not liked any recipes. Click
+                  <a href="/all_recipes">here</a> to check out all recipes.
+                </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

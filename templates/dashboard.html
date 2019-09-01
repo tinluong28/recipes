@@ -39,21 +39,27 @@
           >
         </nav>
         <div class="jumbotron mt-3 transparent">
-          <h5>
+          <h4>
             This is a social network where users can share their favorite
             recipes.
+          </h4>
+          <h5>
+            There are currently {{ all_recipes }} {% if all_recipes > 1
+            %}recipes {% else %} recipe {% endif %}.
           </h5>
-          <h6>There are currently {{ all_recipes }} recipe(s).</h6>
-          <h6>You have contributed {{ user_recipes }} recipe(s).</h6>
+          <h5>
+            You have contributed {{ user_recipes }} {% if user_recipes > 1
+            %}recipes {% else %} recipe {% endif %}.
+          </h5>
         </div>
-        <div class="container row">
-          <div class="card col-md-3 m-2">
+        <div class="container row m-auto">
+          <div class="card col-md-4 m-2 slide_up m-auto">
             <div class="card-body">
               <h3 class="card-title bg-info text-white text-center">Create</h3>
               <a href="/create">Click here to create a new recipe</a>
             </div>
           </div>
-          <div class="card col-md-3 m-2">
+          <div class="card col-md-4 m-2 slide_up m-auto">
             <div class="card-body">
               <h3 class="card-title bg-warning text-white text-center">
                 Your recipes
@@ -61,7 +67,7 @@
               <a href="/review">Click here to view your recipes</a>
             </div>
           </div>
-          <div class="card col-md-3 m-2">
+          <div class="card col-md-4 m-2 slide_up m-auto">
             <div class="card-body">
               <h3 class="card-title bg-primary text-white text-center">
                 All recipes

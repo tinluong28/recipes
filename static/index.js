@@ -8,6 +8,43 @@ $(document).ready(function() {
     }).done(function(res) {
       $("#usernameMsg").html(res);
     });
+    return false;
   });
-  return false;
+  $("#liked").click(function() {
+    var data = $("#likeForm").serialize();
+    $.ajax({
+      method: "POST",
+      url: "/like",
+      data: data
+    }).done(function(res) {
+      $("#likedMsg").html(res);
+    });
+    return false;
+  });
+  $("#unlike").click(function() {
+    var data = $("#unlikeForm").serialize();
+    $ajax({
+      method: "POST",
+      url: "/unlike",
+      data: data
+    }).done(function(res) {
+      $("#likedMsg").html(res);
+    });
+    return false;
+  });
+  $("#liked_recipe").hide();
+  $("#liked-tab").click(function() {
+    console.log("clicked");
+    $("#created-tab").removeClass("active");
+    $("#liked-tab").addClass("active");
+    $("#created_recipe").hide();
+    $("#liked_recipe").show();
+  });
+  $("#created-tab").click(function() {
+    console.log("clicked");
+    $("#liked-tab").removeClass("active");
+    $("#created-tab").addClass("active");
+    $("#liked_recipe").hide();
+    $("#created_recipe").show();
+  });
 });

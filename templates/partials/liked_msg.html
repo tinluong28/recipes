@@ -1,0 +1,5 @@
+{% if liked %}
+<p class="badge badge-success p1">You liked {{ recipe.name }}!</p>
+{% endif %} {% if unliked %}
+<p class="badge badge-warning p1">You unliked {{ recipe.name }}...</p>
+{% endif %}

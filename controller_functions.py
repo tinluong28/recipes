@@ -68,7 +68,10 @@ def review():
     if session['userID']:
         user = User.query.get(session['userID'])
         recipes = Recipe.query.all()
-        return render_template('review.html', user=user, recipes=recipes)
+        liked_recipes = []
+        for recipe in user.recipes_this_user_likes:
+            liked_recipes.append(recipe.id)
+        return render_template('review.html', user=user, recipes=recipes, liked_recipes=liked_recipes)
     else:
         return redirect('/')
 
@@ -77,7 +80,11 @@ def all_users_review():
     if session['userID']:
         user = User.query.get(session['userID'])
         recipes = Recipe.query.all()
-        return render_template('all_users_review.html', user=user, recipes=recipes)
+        # put liked recipes in an array
+        liked_recipes = []
+        for recipe in user.recipes_this_user_likes:
+            liked_recipes.append(recipe.id)
+        return render_template('all_users_review.html', user=user, recipes=recipes, liked_recipes=liked_recipes)
     else:
         return redirect('/')
 
@@ -88,6 +95,30 @@ def display_instruction(recipe_id):
         recipe = Recipe.query.get(recipe_id)
         instructions = recipe.instructions.split(".")
         return render_template('display_instruction.html', user=user, recipe=recipe, instuctions=instructions)
+    else:
+        return redirect('/')
+
+
+def like_recipe():
+    if session['userID']:
+        recipe_id = request.form['recipe_id']
+        current_recipe = Recipe.query.get(recipe_id)
+        current_user = User.query.get(session['userID'])
+        current_user.recipes_this_user_likes.append(current_recipe)
+        db.session.commit()
+        return render_template('partials/liked_msg.html', liked=True, recipe=current_recipe)
+    else:
+        return redirect('/')
+
+
+def unlike_recipe():
+    if session['userID']:
+        recipe_id = request.form['recipe_id']
+        current_recipe = Recipe.query.get(recipe_id)
+        current_user = User.query.get(session['userID'])
+        current_user.recipes_this_user_likes.remove(current_recipe)
+        db.session.commit()
+        return render_template('partials/liked_msg.html', unliked=True, recipe=current_recipe)
     else:
         return redirect('/')
 

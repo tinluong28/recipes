@@ -1,7 +1,7 @@
 .landingpage {
   background-image: url("../img/chips-salsa.jpg");
-  background-color: transparent;
   color: black;
+  background-size: cover;
 }
 .transparent {
   background: rgba(201, 199, 199, 0.6);
@@ -11,23 +11,162 @@
   height: 1500px;
   background-image: url("../img/greens.jpg");
   background-color: transparent;
+  background-size: cover;
 }
 
 .review {
   height: 1500px;
   background-image: url("../img/french-toast.jpg");
+  background-size: cover;
 }
 
 .all-users {
   height: 1500px;
   background-image: url("../img/tomato-soup.jpg");
+  background-size: cover;
 }
 
 .create {
   height: 1300px;
   background-image: url("../img/citrus.jpg");
+  background-size: cover;
 }
 
 .instructions {
   background-image: url("../img/muffin-egg-breakfast.jpg");
+  background-size: cover;
+}
+.like_input {
+  display: none;
+}
+.unlike_input {
+  display: none;
+}
+@-webkit-keyframes moveInBack {
+  0% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 1.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes moveInBack {
+  0% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 1.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(10rem);
+    transform: translateY(10rem);
+  }
+  80% {
+    -webkit-transform: translateY(-1rem);
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(10rem);
+    transform: translateY(10rem);
+  }
+  80% {
+    -webkit-transform: translateY(-1rem);
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+@-webkit-keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-10rem);
+    transform: translateX(-10rem);
+  }
+  80% {
+    -webkit-transform: translateX(1rem);
+    transform: translateX(1rem);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-10rem);
+    transform: translateX(-10rem);
+  }
+  80% {
+    -webkit-transform: translateX(1rem);
+    transform: translateX(1rem);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+.appear {
+  -webkit-animation-name: moveInBack;
+  animation-name: moveInBack;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+}
+
+.slide_up {
+  -webkit-animation-name: moveInBottom;
+  animation-name: moveInBottom;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+}
+
+.recipe-instruction {
+  -webkit-animation-name: moveInLeft;
+  animation-name: moveInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+}
+
+.pill-select {
+  background-color: white;
+  border-radius: 5px;
+  margin: 2px;
+  padding: 15px;
+  cursor: pointer;
+}
+.active {
+  background-color: blue;
+  color: white;
+}
+.pill-select:hover {
+  background-color: blue;
+  color: white;
 }

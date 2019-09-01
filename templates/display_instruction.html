@@ -41,9 +41,60 @@
           </div>
         </nav>
         <div class="container">
-          <div class="card card col-md-10 m-2">
+          <div class="card card col-md-10 m-2 recipe-instruction">
             <div class="card-body">
-              <h3 class="card-title">View recipe</h3>
+              <div class="row">
+                <h3 class="card-title mr-5">View recipe</h3>
+                {% if recipe.author_id != user.id %} {% if
+                user.recipes_this_user_likes.count(recipe.id) > 0 %}
+                <form
+                  id="unlikeForm"
+                  class="d-inline mt-0"
+                  action="/unlike"
+                  method="POST"
+                >
+                  <input
+                    type="text"
+                    name="recipe_id"
+                    value="{{ recipe.id }}"
+                    class="unlike_input"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-sm btn-warning"
+                    id="unliked"
+                  >
+                    Unlike
+                  </button>
+                </form>
+                {% else %}
+                <form
+                  id="likeForm"
+                  class="d-inline mt-0"
+                  action="/like"
+                  method="POST"
+                >
+                  <input
+                    type="text"
+                    name="recipe_id"
+                    value="{{ recipe.id }}"
+                    class="like_input"
+                  />
+                  <button type="submit" class="btn btn-sm btn-info" id="liked">
+                    Like
+                  </button>
+                </form>
+
+                {% endif %} {% else %}
+                <div class="d-inline mt-0">
+                  <a
+                    href="{{ recipe.id }}/delete"
+                    class="btn btn-sm btn-danger mb-0"
+                    >Delete</a
+                  >
+                </div>
+                {% endif %}
+              </div>
               <div>
                 <p><strong>Recipe Name:</strong> {{ recipe.name }}</p>
               </div>
@@ -66,7 +117,7 @@
               </div>
               <a
                 href="/all_recipes"
-                class="btn btn-md btn-secondary"
+                class="btn btn-sm btn-secondary"
                 type="submit"
               >
                 Back
