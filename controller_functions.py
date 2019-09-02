@@ -113,7 +113,7 @@ def like_recipe():
         current_user.recipes_this_user_likes.append(current_recipe)
         db.session.commit()
         # return render_template('partials/liked_msg.html', liked=True, recipe=current_recipe)
-        return redirect(f'/instruction/{recipe_id}')
+        return redirect('/instruction/{}'.format(recipe_id))
     else:
         return redirect('/')
 
@@ -126,7 +126,7 @@ def unlike_recipe():
         current_user.recipes_this_user_likes.remove(current_recipe)
         db.session.commit()
         # return render_template('partials/liked_msg.html', unliked=True, recipe=current_recipe)
-        return redirect(f'/instruction/{recipe_id}')
+        return redirect('/instruction/{}'.format(recipe_id))
     else:
         return redirect('/')
 
