@@ -8,30 +8,27 @@ $(document).ready(function() {
     }).done(function(res) {
       $("#usernameMsg").html(res);
     });
-    return false;
   });
-  $("#liked").click(function() {
-    var data = $("#likeForm").serialize();
-    $.ajax({
-      method: "POST",
-      url: "/like",
-      data: data
-    }).done(function(res) {
-      $("#likedMsg").html(res);
-    });
-    return false;
-  });
-  $("#unlike").click(function() {
-    var data = $("#unlikeForm").serialize();
-    $ajax({
-      method: "POST",
-      url: "/unlike",
-      data: data
-    }).done(function(res) {
-      $("#likedMsg").html(res);
-    });
-    return false;
-  });
+  // $("#liked").click(function() {
+  //   var data = $("#likeForm").serialize();
+  //   $.ajax({
+  //     method: "POST",
+  //     url: "/like",
+  //     data: data
+  //   }).done(function(res) {
+  //     $("#likedMsg").html(res);
+  //   });
+  // });
+  // $("#unliked").click(function() {
+  //   var data = $("#unlikeForm").serialize();
+  //   $ajax({
+  //     method: "POST",
+  //     url: "/unlike",
+  //     data: data
+  //   }).done(function(res) {
+  //     $("#likedMsg").html(res);
+  //   });
+  // });
   $("#liked_recipe").hide();
   $("#liked-tab").click(function() {
     console.log("clicked");
@@ -47,4 +44,5 @@ $(document).ready(function() {
     $("#liked_recipe").hide();
     $("#created_recipe").show();
   });
+  return false;
 });

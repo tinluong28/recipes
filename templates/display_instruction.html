@@ -22,6 +22,11 @@
       type="text/css"
       href="{{ url_for('static', filename='styles/index.css') }}"
     />
+    <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+    <script type="text/javascript" src="/static/index.js"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -43,15 +48,15 @@
         <div class="container">
           <div class="card card col-md-10 m-2 recipe-instruction">
             <div class="card-body">
+              <div id="likedMsg"></div>
               <div class="row">
                 <h3 class="card-title mr-5">View recipe</h3>
-                {% if recipe.author_id != user.id %} {% if
-                user.recipes_this_user_likes.count(recipe.id) > 0 %}
+                {% if recipe.author_id != user.id %} {% if been_liked %}
                 <form
                   id="unlikeForm"
-                  class="d-inline mt-0"
                   action="/unlike"
                   method="POST"
+                  class="d-inline mt-0"
                 >
                   <input
                     type="text"
@@ -70,9 +75,9 @@
                 {% else %}
                 <form
                   id="likeForm"
-                  class="d-inline mt-0"
                   action="/like"
                   method="POST"
+                  class="d-inline mt-0"
                 >
                   <input
                     type="text"
@@ -95,19 +100,22 @@
                 </div>
                 {% endif %}
               </div>
-              <div>
-                <p><strong>Recipe Name:</strong> {{ recipe.name }}</p>
+              <div class="row">
+                <p class="col-md-5">
+                  <strong>Recipe Name:</strong> {{ recipe.name }}
+                </p>
+                <p class="text-primary">{{ liked_recipes | length }} likes</p>
               </div>
               <div>
                 <p><strong>Description:</strong> {{ recipe.description }}</p>
               </div>
               <div>
                 <p><strong>Instructions:</strong></p>
-                <ul>
+                <ol>
                   {% for step in recipe.instructions.split(".") %}
                   <li>{{ step }}</li>
                   {% endfor %}
-                </ul>
+                </ol>
               </div>
               <div>
                 <p>
@@ -115,12 +123,15 @@
                   {{ recipe.under30 }}
                 </p>
               </div>
+              <a href="/review" class="btn btn-sm btn-secondary" type="submit">
+                Your Recipes
+              </a>
               <a
                 href="/all_recipes"
                 class="btn btn-sm btn-secondary"
                 type="submit"
               >
-                Back
+                All Recipes
               </a>
             </div>
           </div>

@@ -33,6 +33,7 @@
 }
 
 .instructions {
+  height: 1300px;
   background-image: url("../img/muffin-egg-breakfast.jpg");
   background-size: cover;
 }

@@ -1,4 +1,5 @@
 from flask import flash
+from models import User, Recipe, likes_table
 import re
 from datetime import date
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -25,6 +26,9 @@ def validate_signup(form):
     if not NAME_REGEX.match(form['user_name']):
         is_valid = False
         flash('First name must contain all letters', 'errors')
+    if User.query.filter_by(user_name=form['user_name']):
+        is_valid = False
+        flash('User name has been taken', 'errors')
     if age < 18:
         is_valid = False
         flash('You must be at least 18 years old to register', 'errors')
