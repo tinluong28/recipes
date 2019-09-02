@@ -24,9 +24,9 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    ingredients = db.Column(db.Text, nullable=False)
+    ingredients = db.Column(db.Text(), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
-    under30 = db.Column(db.String(3), nullable=False)
+    under30 = db.Column(db.String(3), default="Yes", nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     author = db.relationship('User', foreign_keys=[
                              author_id], backref='recipes', lazy=True)

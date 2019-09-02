@@ -110,6 +110,18 @@
                 <p><strong>Description:</strong> {{ recipe.description }}</p>
               </div>
               <div>
+                <p><strong>Ingredients:</strong></p>
+                {% if recipe.ingredients %}
+                <ol>
+                  {% for item in recipe.ingredients.split(",") %}
+                  <li>{{ item }}</li>
+                  {% endfor %}
+                </ol>
+                {% else %}
+                <p><i>It's a mystery</i></p>
+                {% endif %}
+              </div>
+              <div>
                 <p><strong>Instructions:</strong></p>
                 <ol>
                   {% for step in recipe.instructions.split(".") %}

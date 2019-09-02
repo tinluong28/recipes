@@ -56,7 +56,7 @@ def create_recipe():
     if session['userID']:
         if validate_recipe(request.form):
             new_instance_of_recipe = Recipe(
-                name=request.form['name'], description=request.form['description'], instructions=request.form['instructions'], under30=request.form['under30'], author_id=session['userID'])
+                name=request.form['name'], description=request.form['description'], instructions=request.form['instructions'], ingredients=request.form['ingredients'], under30=request.form['under30'], author_id=session['userID'])
             db.session.add(new_instance_of_recipe)
             db.session.commit()
             return redirect('/review')
@@ -99,8 +99,8 @@ def display_instruction(recipe_id):
             liked_recipes.append(recipe_user_liked.id)
             if recipe_user_liked.id == recipe.id:
                 been_liked = True
-        instructions = recipe.instructions.split(".")
-        return render_template('display_instruction.html', user=user, recipe=recipe, instuctions=instructions, liked_recipes=liked_recipes, been_liked=been_liked)
+        # instructions = recipe.instructions.split(".")
+        return render_template('display_instruction.html', user=user, recipe=recipe, liked_recipes=liked_recipes, been_liked=been_liked)
     else:
         return redirect('/')
 
