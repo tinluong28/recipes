@@ -11,6 +11,7 @@ $(document).ready(function() {
     return false;
   });
   $("#email").keyup(function() {
+    $("usernameMsg").hide();
     var data = $("#signupForm").serialize();
     $.ajax({
       method: "POST",

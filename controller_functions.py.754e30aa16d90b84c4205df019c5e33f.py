@@ -162,7 +162,6 @@ def verify_email():
     else:
         return render_template('partials/email.html', email_found=False)
 
-
 def logout():
     session.clear()
     return redirect('/')
