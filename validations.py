@@ -18,6 +18,9 @@ def calculateAge(birthdate):
 def validate_signup(form):
     is_valid = True
     age = 0
+    check_user_name = User.query.filter_by(user_name=form['user_name']).count()
+    check_email = User.query.filter_by(email=form['email']).count()
+    print(check_user_name)
     if form['birthdate']:
         age = calculateAge(form['birthdate'])
     if len(form['user_name']) < 1:
@@ -25,10 +28,13 @@ def validate_signup(form):
         flash('First name is required', 'errors')
     if not NAME_REGEX.match(form['user_name']):
         is_valid = False
-        flash('First name must contain all letters', 'errors')
-    if User.query.filter_by(user_name=form['user_name']):
+        flash('User name should not contain any special characters', 'errors')
+    if check_user_name > 0:
         is_valid = False
         flash('User name has been taken', 'errors')
+    if check_email > 0:
+        is_valid = False
+        flash('This email has been registered', 'errors')
     if age < 18:
         is_valid = False
         flash('You must be at least 18 years old to register', 'errors')

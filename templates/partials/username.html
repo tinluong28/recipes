@@ -1,7 +1,7 @@
-{% if user_name %} {% if user_found %}
+{% if user_name %} {% if too_short %}
+<p class="badge badge-danger">User name must be at least 3 characters</p>
+{% else %} {% if user_found %}
 <p class="badge badge-danger p1">This username is unavailable</p>
 {% else %}
 <p class="badge badge-success p1">This username is available</p>
-{% endif %} {% endif %} {% if email %} {% if email_found %}
-<p class="badge badge-danger p1">This email has been registered</p>
-{% endif %} {% endif %}
+{% endif %} {% endif %}{% endif %}

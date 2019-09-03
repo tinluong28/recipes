@@ -144,20 +144,21 @@ def delete_recipe(recipe_id):
 
 def verify_username():
     if len(request.form['user_name']) < 3:
+        return render_template('partials/username.html', too_short=True, user_name=True)
+    else:
         found = False
         username = User.query.filter_by(
             user_name=request.form['user_name']).first()
         if username:
             found = True
-        return render_template('partials/username.html', user_name=True, user_found=found)
+        return render_template('partials/username.html', too_short=False, user_name=True, user_found=found)
 
 
 def verify_email():
-    found = False
     email = User.query.filter_by(email=request.form['email']).first()
     if email:
-        found = True
-    return render_template('/partials/username.html', email=True, email_found=found)
+        email_found = True
+    return render_template('/partials/email.html', email_found=email_found)
 
 
 def logout():

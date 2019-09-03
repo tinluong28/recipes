@@ -8,27 +8,20 @@ $(document).ready(function() {
     }).done(function(res) {
       $("#usernameMsg").html(res);
     });
+    return false;
   });
-  // $("#liked").click(function() {
-  //   var data = $("#likeForm").serialize();
-  //   $.ajax({
-  //     method: "POST",
-  //     url: "/like",
-  //     data: data
-  //   }).done(function(res) {
-  //     $("#likedMsg").html(res);
-  //   });
-  // });
-  // $("#unliked").click(function() {
-  //   var data = $("#unlikeForm").serialize();
-  //   $ajax({
-  //     method: "POST",
-  //     url: "/unlike",
-  //     data: data
-  //   }).done(function(res) {
-  //     $("#likedMsg").html(res);
-  //   });
-  // });
+  $("#email").keyup(function() {
+    var data = $("#signupForm").serialize();
+    $.ajax({
+      method: "POST",
+      url: "/email",
+      data: data
+    }).done(function(res) {
+      $("#emailMsg").html(res);
+    });
+    return false;
+  });
+
   $("#liked_recipe").hide();
   $("#liked-tab").click(function() {
     console.log("clicked");
